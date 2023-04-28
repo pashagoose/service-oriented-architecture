@@ -53,8 +53,11 @@ def make_serializer(mode: str) -> interfaces.Serializer:
 
 def _run_serialization_benchmark(mode: str, iterations: int = 1000) -> SerializationFormatResults:
     users = data.get_test_data()
+    logging.info("Generated test data")
+
     serializer = make_serializer(mode)
     serializer.prepare(users)
+    logging.info("Prepared serializer for mode `%s`", mode)
 
     serialized_bytes = serializer.serialize()
     result = SerializationFormatResults(name=mode, serialized_size=len(serialized_bytes))
@@ -66,18 +69,21 @@ def _run_serialization_benchmark(mode: str, iterations: int = 1000) -> Serializa
             globals={
                 "serializer": serializer,
             },
-        )
+        ) / iterations,
     )
+    logging.info("Measured serialization time")
+
     result.deserialization_time = datetime.timedelta(
-            seconds=timeit.timeit(
+        seconds=timeit.timeit(
             "serializer.deserialize(serialized_bytes)", 
             number=iterations, 
             globals={
                 "serializer": serializer,
                 "serialized_bytes": serialized_bytes
             },
-        )
+        ) / iterations,
     )
+    logging.info("Measured deserialization time")
 
     return result
 
@@ -87,7 +93,7 @@ def _create_app(result: SerializationFormatResults):
 
     @app.route("/get_result")
     def get_result():
-        return f"{result.name}-{result.serialized_size}-{result.serialization_time.microseconds}μs-{result.deserialization_time.microseconds}μs"
+        return f"{result.name}-{result.serialized_size}-{result.serialization_time.microseconds / 1000}ms-{result.deserialization_time.microseconds / 1000}ms"
 
     return app
 
