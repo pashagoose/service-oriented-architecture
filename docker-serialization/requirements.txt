@@ -1,4 +1,5 @@
 dict2xml==1.7.3
+msgpack==1.0.5
 protobuf==3.20
 PyYaml==5.4.1
 xml-serializer==1.0.5
