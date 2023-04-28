@@ -5,7 +5,7 @@ from ..testing_data import data
 
 class Serializer(metaclass=ABCMeta):
     @abstractmethod
-    def prepare(self, users: List["data.User"]):
+    def prepare(self, testing_data: "data.TestingData"):
         return
 
     @abstractmethod

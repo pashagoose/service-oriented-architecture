@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 
+
 @dataclass
 class Friend:
     id: int
@@ -16,7 +17,12 @@ class User:
     cars: List[str]
 
 
-def get_test_data() -> List[User]:
+@dataclass
+class TestingData:
+    users: List[User]
+
+
+def get_test_data() -> TestingData:
     result = []
 
     for i in range(500):
@@ -29,4 +35,4 @@ def get_test_data() -> List[User]:
 
         result.append(User(name=f"name-id{i}", id=i, friends=friends, cars=["toyota", "bmw"]))
     
-    return result
+    return TestingData(users=result)

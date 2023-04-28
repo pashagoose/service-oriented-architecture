@@ -6,8 +6,9 @@ import logging
 import timeit
 
 from .interfaces import interfaces
-from .testing_data import data
+from .json import serializer as json_serializer
 from .proto import serializer as proto_serializer
+from .testing_data import data
 
 
 def _build_parser():
@@ -47,6 +48,8 @@ class SerializationFormatResults:
 def make_serializer(mode: str) -> interfaces.Serializer:
     if mode == "proto":
         return proto_serializer.make_serializer()
+    elif mode == "json":
+        return json_serializer.make_serializer()
     else:
         raise Exception(f"Serialization mode {mode} is not supported")
 

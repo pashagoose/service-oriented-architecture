@@ -1,1 +1,1 @@
-betterproto[compiler]
+protobuf==3.20
