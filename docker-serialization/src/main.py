@@ -5,6 +5,7 @@ from flask import Flask
 import logging
 import timeit
 
+from .avro import serializer as avro_serializer
 from .interfaces import interfaces
 from .json import serializer as json_serializer
 from .msgpack import serializer as msgpack_serializer
@@ -62,6 +63,8 @@ def make_serializer(mode: str) -> interfaces.Serializer:
         return yaml_serializer.make_serializer()
     elif mode == "msgpack":
         return msgpack_serializer.make_serializer()
+    elif mode == "avro":
+        return avro_serializer.make_serializer()
     else:
         raise Exception(f"Serialization mode {mode} is not supported")
 
