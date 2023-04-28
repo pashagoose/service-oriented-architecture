@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package user;
+
+message Friend {
+    int64 id = 1;
+    double money = 2;
+    string name = 3;
+}
+
+message User {
+    string name = 1;
+    int64 id = 2;
+
+    repeated Friend friends = 3;
+    repeated string cars = 4;
+}
+
+message TestingData {
+    repeated User users = 1;
+}
