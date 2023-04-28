@@ -1,0 +1,43 @@
+services:
+  proto:
+    image: docker.io/pavelguskov/proto_serialization
+    environment:
+      - PORT=9000
+    ports:
+      - "9000:9000"
+  json:
+    image: docker.io/pavelguskov/json_serialization
+    environment:
+      - PORT=9001
+    ports:
+      - "9001:9001"
+  xml:
+    image: docker.io/pavelguskov/xml_serialization
+    environment:
+      - PORT=9002
+    ports:
+      - "9002:9002"
+  pickle:
+    image: docker.io/pavelguskov/pickle_serialization
+    environment:
+      - PORT=9003
+    ports:
+      - "9003:9003"
+  avro:
+    image: docker.io/pavelguskov/avro_serialization
+    environment:
+      - PORT=9004
+    ports:
+      - "9004:9004"
+  yaml:
+    image: docker.io/pavelguskov/yaml_serialization
+    environment:
+      - PORT=9005
+    ports:
+      - "9005:9005"
+  msgpack:
+    image: docker.io/pavelguskov/msgpack_serialization
+    environment:
+      - PORT=9006
+    ports:
+      - "9006:9006"

@@ -1,6 +1,8 @@
 avro==1.11.1
 dict2xml==1.7.3
+flask==2.2.2
+grpcio-tools==1.49.0
 msgpack==1.0.5
-protobuf==3.20
+protobuf==4.22.3
 PyYaml==5.4.1
 xml-serializer==1.0.5

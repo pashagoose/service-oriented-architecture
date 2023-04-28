@@ -22,7 +22,7 @@ def _build_parser():
         "--mode",
         dest="mode",
         type=str,
-        help="Serialization format - one of (\"proto\", \"json\", \"pickle\", \"xml\", \"avro\", \"yaml\", \"messagepack\")",
+        help="Serialization format - one of (\"proto\", \"json\", \"pickle\", \"xml\", \"avro\", \"yaml\", \"msgpack\")",
         default="proto",
     )
     parser.add_argument(
