@@ -11,6 +11,7 @@ from .pickle import serializer as pickle_serializer
 from .proto import serializer as proto_serializer
 from .testing_data import data
 from .xml import serializer as xml_serializer
+from .yaml import serializer as yaml_serializer
 
 
 def _build_parser():
@@ -56,6 +57,8 @@ def make_serializer(mode: str) -> interfaces.Serializer:
         return pickle_serializer.make_serializer()
     elif mode == "xml":
         return xml_serializer.make_serializer()
+    elif mode == "yaml":
+        return yaml_serializer.make_serializer()
     else:
         raise Exception(f"Serialization mode {mode} is not supported")
 

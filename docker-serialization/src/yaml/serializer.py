@@ -1,24 +1,23 @@
 from dataclasses import asdict
-import dict2xml
 from typing import Any, Dict
-import xml.etree.ElementTree as ET
+import yaml
 
 from ..interfaces import interfaces
 from ..testing_data import data
 
 
-class XmlSerializer(interfaces.Serializer):
+class YamlSerializer(interfaces.Serializer):
     testing_data: Dict[str, Any]
 
     def prepare(self, testing_data: "data.TestingData"):
         self.testing_data = asdict(testing_data)
 
     def serialize(self) -> bytes:
-        return dict2xml.dict2xml(self.testing_data, wrap="testing_data")
+        return yaml.dump(self.testing_data, Dumper=yaml.CSafeDumper)
 
     def deserialize(self, bts: bytes):
-        _ = ET.ElementTree(ET.fromstring(bts))
+        _ = yaml.load(bts, Loader=yaml.CSafeLoader)
 
 
 def make_serializer() -> interfaces.Serializer:
-    return XmlSerializer()
+    return YamlSerializer()
